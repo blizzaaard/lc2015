@@ -77,8 +77,8 @@ class Solution {
             node = newNode->next;
         }
 
-        // Restore the original list.  We cannot do this in the last step when
-        // we assign the random pointers, becaue a node's random pointer could
+        // Restore the original list.  We cannot do this in the previous step when
+        // assigning the random pointers, because a node's random pointer could
         // point to a previous node.
 
         node = head;
