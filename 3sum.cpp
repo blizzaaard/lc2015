@@ -106,13 +106,13 @@ public:
         sort(num.begin(), num.end());
         for (int i = 0; i < num.size(); ++i) {
             if (0 != i && num[i - 1] == num[i]) continue;
-            int target = -num[i];
             int start = i + 1, end = num.size() - 1;
             while (start < end) {
-                //if (end != num.size() - 1 && num[end] == num[end + 1]) {
+                // No need to check if num[end] is duplicated or not
+                // if (end != num.size() - 1 && num[end] == num[end + 1]) {
                 //    --end;
-                ////    continue;
-                //}
+                //    continue;
+                // }
                 if (start != i + 1 && num[start - 1] == num[start]) {
                     ++start;
                     continue;
