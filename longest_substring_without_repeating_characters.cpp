@@ -17,20 +17,19 @@ class Solution {
     {
         std::unordered_set<int> hash;
         int left    = 0;
-        int right   = 0;
         int maximum = 0;
-        for (right = 0; right < s.size(); ++right) {
+        for (int right = 0; right < s.size(); ++right) {
             if (0 == hash.count(s[right])) {
                 // s[right] is not a repeating character.
 
                 hash.insert(s[right]);
+                maximum = std::max(maximum, right - left + 1);
             } else {
                 // s[right] is a repeating character, so we need to caculate
                 // the max length and then shrink the window.
 
-                // TODO: no need to update the maximum length when shrinking
+                // No need to update the maximum length when shrinking
                 // the window.
-                maximum = std::max(maximum, right - left);
 
                 while (s[left] != s[right]) {
                     hash.erase(s[left]);
@@ -44,7 +43,6 @@ class Solution {
                 ++left;
             }
         }
-        maximum = std::max(maximum, right - left);
         return maximum;
     }
 };
