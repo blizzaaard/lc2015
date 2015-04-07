@@ -1,4 +1,4 @@
-// #117 Populating Next Right Pointers in Each Noda II
+// #117 Populating Next Right Pointers in Each Node II
 //
 // Follow up for problem "Populating Next Right Pointers in Each Node".
 //
