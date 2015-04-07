@@ -60,9 +60,9 @@ class Solution {
         // 0 10
         //
         // 1 10  reverse order + 1 at the most significant bit
-        // 1 00
         // 1 01
         // 1 11
+        // 1 10
         // ----
 
         for (int i = 1; i <= n; ++i) {
