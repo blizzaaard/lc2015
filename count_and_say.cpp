@@ -48,6 +48,39 @@ class Solution {
     }
 };
 
+class Solution {
+
+    string toString(int n)
+    {
+        ostringstream oss;
+        oss << n;
+        return oss.str();
+    }
+
+public:
+    string countAndSay(int n)
+    {
+        string result;
+        if (0 == n) return result;
+        result = "1";
+        for (int i = 1; i < n; ++i) {
+            int count = 1;
+            string tmp;
+            int j = 1;
+            for (; j < result.size(); ++j) {
+                if (result[j] == result[j - 1]) ++count;
+                else {
+                    tmp.append(toString(count) + result[j - 1]);
+                    count = 1;
+                }
+            }
+            tmp.append(toString(count) + result[j - 1]);
+            swap(result, tmp);
+        }
+        return result;
+    }
+};
+
 int main()
 {
     Solution s;
