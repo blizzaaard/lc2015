@@ -45,6 +45,26 @@ class Solution {
     }
 };
 
+class Solution1 {
+    bool helper(TreeNode *node, int *height)
+    {
+        if (!node) {
+            *height = 0;
+            return true;
+        }
+        int leftHeight = 0, rightHeight = 0;
+        bool bLeft = helper(node->left, &leftHeight);
+        bool bRight = helper(node->right, &rightHeight);
+        *height = max(leftHeight, rightHeight) + 1;
+        return bLeft && bRight && abs(leftHeight - rightHeight) < 2;
+    }
+public:
+    bool isBalanced(TreeNode *root) {
+        int height = 0;
+        return helper(root, &height);
+    }
+};
+
 int main()
 {
     Solution s;
