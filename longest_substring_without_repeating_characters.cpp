@@ -25,11 +25,9 @@ class Solution {
                 hash.insert(s[right]);
                 maximum = std::max(maximum, right - left + 1);
             } else {
-                // s[right] is a repeating character, so we need to caculate
-                // the max length and then shrink the window.
-
-                // No need to update the maximum length when shrinking
-                // the window.
+                // s[right] is a repeating character, so we need to shrink
+                // the window. However, no need to update the maximum length
+                // when shrinking the window.
 
                 while (s[left] != s[right]) {
                     hash.erase(s[left]);
