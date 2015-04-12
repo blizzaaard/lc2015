@@ -63,6 +63,29 @@ class Solution {
     }
 };
 
+class Solution1 {
+
+  public:
+    void nextPermutation(vector<int> &num) {
+        int index = -1;
+        for (int i = num.size() - 2; i >= 0; --i) {
+            if (num[i] < num[i + 1]) {
+                index = i;
+                break;
+            }
+        }
+        if (-1 != index) {
+            for (int i = num.size() - 1; i >= 0; --i) {
+                if (num[i] > num[index]) {
+                    swap(num[i], num[index]);
+                    break;
+                }
+            }
+        }
+        reverse(num.begin() + index + 1, num.end());
+    }
+};
+
 int main()
 {
     {
