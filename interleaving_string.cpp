@@ -28,10 +28,10 @@ class Solution_Recursion {
         if (i == s1.size() && j == s2.size() && k == s3.size()) {
             return true;
         }
-        if (s3[k] == s1[i] && helper(s1, s2, s3, i + 1, j, k + 1)) {
+        if (i < s1.size() && s3[k] == s1[i] && helper(s1, s2, s3, i + 1, j, k + 1)) {
             return true;
         }
-        if (s3[k] == s2[j] && helper(s1, s2, s3, i, j + 1, k + 1)) {
+        if (j < s2.size() && s3[k] == s2[j] && helper(s1, s2, s3, i, j + 1, k + 1)) {
             return true;
         }
         return false;
@@ -55,9 +55,7 @@ class Solution {
     {
         int m = s1.size();
         int n = s2.size();
-        if (m + n != s3.size()) {
-            return false;
-        }
+        if (m + n != s3.size()) return false;
 
         // We add one more element to the matrix to handle the empty strings
         // more easily.
@@ -130,11 +128,13 @@ int main()
     Solution_Recursion sr;
 
     // This test case is not covered by LeetCode
+    std::cout << sr.isInterleave("", "abc", "abc") << std::endl;
     std::cout << sr.isInterleave("adc", "", "abc") << std::endl;
 
     Solution s;
 
     // This test case is not covered by LeetCode
+    std::cout << s.isInterleave("", "abc", "abc") << std::endl;
     std::cout << s.isInterleave("adc", "", "abc") << std::endl;
 
     return 0;
