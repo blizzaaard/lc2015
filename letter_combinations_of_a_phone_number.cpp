@@ -70,6 +70,8 @@ class Solution {
     std::vector<std::string> letterCombinations(const std::string& digits)
     {
         std::vector<std::string> results;
+        if (digits.empty()) return results;
+
         results.push_back("");
 
         std::vector<std::string> letters(10);
