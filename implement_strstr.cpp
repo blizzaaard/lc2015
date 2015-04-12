@@ -50,6 +50,23 @@ class Solution {
     }
 };
 
+class Solution1 {
+public:
+    int strStr(char *haystack, char *needle) {
+        char *curr = haystack;
+        while (*curr) {
+            char *p = curr, *q = needle;
+            while (1) {
+                if (!*q) return curr - haystack;
+                if (!*p) return -1;
+                if (*p++ != *q++) break;
+            }
+            ++curr;
+        }
+        return !*needle ? 0 : -1;
+    }
+};
+
 int main()
 {
     Solution s;
