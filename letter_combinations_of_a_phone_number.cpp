@@ -27,19 +27,17 @@ void print(const std::vector<std::string>& result)
 class Solution_Recursion {
 
     void helper(std::vector<std::string>        *results,
-                std::string                     *result,
+                const std::string&               result,
                 const std::string&               digits,
                 const std::vector<std::string>&  letters,
-                int                              i)
+                int                              index)
     {
-        if (i >= digits.size()) {
-            results->push_back(*result);
+        if (index >= digits.size()) {
+            results->push_back(result);
             return;
         }
-        for (int j = 0; j < letters[digits[i] - '0'].size(); ++j) {
-            result->push_back(letters[digits[i] - '0'][j]);
-            helper(results, result, digits, letters, i + 1);
-            result->pop_back();
+        for (int i = 0; i < letters[digits[index] - '0'].size(); ++i) {
+            helper(results, result + letters[digits[index] - '0'][i], digits, letters, index + 1);
         }
     }
 
@@ -58,11 +56,10 @@ class Solution_Recursion {
 
         std::vector<std::string> results;
         if (digits.empty()) {
-            results.push_back(digits);
             return results;
         }
         std::string result;
-        helper(&results, &result, digits, letters, 0);
+        helper(&results, result, digits, letters, 0);
         return results;
     }
 };
