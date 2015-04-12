@@ -28,10 +28,10 @@ class Solution_Recursion {
         if (i == s1.size() && j == s2.size() && k == s3.size()) {
             return true;
         }
-        if (i < s1.size() && s3[k] == s1[i] && helper(s1, s2, s3, i + 1, j, k + 1)) {
+        if (i < s1.size() && k < s3.size() && s3[k] == s1[i] && helper(s1, s2, s3, i + 1, j, k + 1)) {
             return true;
         }
-        if (j < s2.size() && s3[k] == s2[j] && helper(s1, s2, s3, i, j + 1, k + 1)) {
+        if (j < s2.size() && k < s3.size() && s3[k] == s2[j] && helper(s1, s2, s3, i, j + 1, k + 1)) {
             return true;
         }
         return false;
@@ -67,21 +67,21 @@ class Solution {
                                     m + 1, std::vector<bool>(n + 1, false));
         opt[0][0] = true;
 
-        // s1 = "adc"
+        // s1 = "abc"
         // s2 = ""
         // s3 = "abc"
         //
-        // opt[i][0] is 'true' iff s1(0, i) and s3(0, i) are the same.
+        // opt[i][0] is 'true' iff s1(0, i) and s3(0, i) are the same and opt[i - 1][0] is 'true'.
 
         for (int i = 1; i < m + 1; ++i) {
             opt[i][0] = opt[i - 1][0] && s3[i - 1] == s1[i - 1];
         }
 
         // s1 = ""
-        // s2 = "adc"
+        // s2 = "abc"
         // s3 = "abc"
         //
-        // opt[0][j] is 'true' iff s1(0, j) and s3(0, j) are the same.
+        // opt[0][j] is 'true' iff s1(0, j) and s3(0, j) are the same and opt[0][j - 1] is 'true'.
 
         for (int j = 1; j < n + 1; ++j) {
             opt[0][j] = opt[0][j - 1] && s3[j - 1] == s2[j - 1];
@@ -103,12 +103,11 @@ class Solution {
                     // interleaving substrings of s3[k - 2].
 
                     opt[i][j] = opt[i - 1][j];
-                }
-                if (opt[i][j]) {
+                    
                     // Since s1[i - 1] matched s3[k - 1], we don't need to
                     // check s2[:j - 1].
-
-                    continue;
+                    
+                    if (opt[i][j]) continue;
                 }
                 if (s3[k - 1] == s2[j - 1]) {
                     // Since s2[j - 1] matches s3[k - 1], we need to check if
