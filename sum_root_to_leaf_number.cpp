@@ -69,6 +69,29 @@ class Solution {
     }
 };
 
+class Solution1 {
+
+    void helper(TreeNode *node, int *result, int sum)
+    {
+        if (!node) return;
+        sum += node->val;
+        if (!node->left && !node->right) {
+            *result += sum;
+        } else {
+            helper(node->left,  result, sum * 10);
+            helper(node->right, result, sum * 10);
+        }
+    }
+
+  public:
+    int sumNumbers(TreeNode *root)
+    {
+        int result = 0;
+        helper(root, &result, 0);
+        return result;
+    }
+};
+
 int main()
 {
     Solution s;
