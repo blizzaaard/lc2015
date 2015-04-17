@@ -89,6 +89,26 @@ class Solution1 {
     }
 };
 
+class Solution1 {
+
+  public:
+    int majorityElement(vector<int> &num)
+    {
+        int candidate = 0;
+        int count = 0;
+        for (int i = 0; i < num.size(); ++i) {
+            if (0 == count) {
+                candidate = num[i];
+                count = 1;
+            } else {
+                if (num[i] == candidate) ++count;
+                else --count;
+            }
+        }
+        return candidate;
+    }
+};
+
 int main()
 {
     Solution1 s;
