@@ -10,10 +10,11 @@ struct Point {
  };
  
 class Solution {
+
   public:
     int maxPoints(std::vector<Point> &points) {
     	if (3 > points.size()) {
-    		return points.size();
+            return points.size();
     	}
         int maximum = 0;
         for (int i = 0; i < points.size(); ++i) {
@@ -26,28 +27,24 @@ class Solution {
                 double deltaX = points[i].x - points[j].x;
                 double deltaY = points[i].y - points[j].y;
                 if (0 == deltaX && 0 == deltaY) {
-                	++samePtCount;
+                    ++samePtCount;
                 } else if (0 == deltaX) {
-                	++yAxisCount;
+                    ++yAxisCount;
                 } else {
-                	double k = deltaY / deltaX;
-                	std::pair<Hash::iterator, bool> ret =
-                				 hash.insert(std::make_pair(k, 0));
-                	++ret.first->second;
-                	std::cout << "(" << points[i].x << "," << points[i].y
-                			  << ") - (" << points[j].x << "," << points[j].y
-                			  << "): " << k
-                			  << std::endl;
+                    double k = deltaY / deltaX;
+                    std::pair<Hash::iterator, bool> ret =
+                            hash.insert(std::make_pair(k, 0));
+                    ++ret.first->second;
                 }
             }
             for (Hash::const_iterator it  = hash.begin();
-            						  it != hash.end();
-            						++it)
+                                      it != hash.end();
+                                    ++it)
             {
-            	localMax = std::max(localMax, it->second);
+                localMax = std::max(localMax, it->second);
             }
             localMax = std::max(localMax, yAxisCount);
-            localMax += (samePtCount + 1); // self
+            localMax += samePtCount + 1; // +1 for self
             maximum = std::max(maximum, localMax);
         }
         return maximum;

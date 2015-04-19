@@ -40,6 +40,28 @@ class Solution {
     }
 };
 
+class Solution1 {
+
+public:
+    int lengthOfLastWord(const char *s) {
+        int length = 0;
+        const char *p = s;
+        bool inWord = false;
+        while (*p) {
+            if (' ' == *p) inWord = false;
+            else {
+                if (inWord) ++length;
+                else {
+                    length = 1;
+                    inWord = true;
+                }
+            }
+            ++p;
+        }
+        return length;
+    }
+};
+
 int main()
 {
     Solution s;
