@@ -48,7 +48,9 @@ class Solution {
     }
 };
 
-class Solution {
+using namespace std;
+
+class Solution1 {
 
     string toString(int n)
     {
@@ -83,7 +85,7 @@ public:
 
 int main()
 {
-    Solution s;
-    std::cout << s.countAndSay(5) << std::endl;
+    Solution1 s;
+    std::cout << s.countAndSay(6) << std::endl;
     return 0;
 }

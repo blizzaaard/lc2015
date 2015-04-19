@@ -36,5 +36,6 @@ int main()
     Solution s;
     std::cout << s.pow(4.5, 5) << std::endl;
     std::cout << s.pow(10, 5) << std::endl;
+    std::cout << s.pow(9, 99) << std::endl;
     return 0;
 }

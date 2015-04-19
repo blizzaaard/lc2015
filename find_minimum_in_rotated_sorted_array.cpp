@@ -24,6 +24,10 @@ public:
     int findMin(vector<int> &num) {
         int start = 0, end = num.size() - 1;
         while (start < end) {
+            // NOTE: the reason why we don't use 'start <= end' is that we will
+            // return 'num[start]' (unlike in #33 Search in Rotated Sorted
+            // Array where we don't return any element)
+
             int mid = start + (end - mid) / 2;
             if (num[mid] < num[end]) end = mid;
             else start = mid + 1;
