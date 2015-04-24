@@ -98,9 +98,43 @@ class Solution {
     }
 };
 
+using namespace std;
+
+class Solution1 {
+
+  public:
+    vector<int> spiralOrder(vector<vector<int> > &matrix)
+    {
+        vector<int> result;
+        int m = matrix.size();
+        if (0 == m) return result;
+        int n = matrix[0].size();
+        int i = 0, j = 0, state = 0;
+        int top = 0, bottom = m - 1, left = 0, right = n - 1;
+        while (top <= bottom && left <= right) {
+            if (j > right) {
+                --j; ++i; state = 1; ++top;
+            } else if (i > bottom) {
+                --i; --j; state = 2; --right;
+            } else if (j < left) {
+                ++j; --i; state = 3; --bottom;
+            } else if (i < top) {
+                ++i; ++j; state = 0; ++left;
+            } else {
+                result.push_back(matrix[i][j]);
+                if (0 == state) ++j;
+                else if (1 == state) ++i;
+                else if (2 == state) --j;
+                else if (3 == state) --i;
+            }
+        }
+        return result;
+    }
+};
+
 int main()
 {
-    Solution s;
+    Solution1 s;
     {
         std::vector<std::vector<int> > matrix(3, std::vector<int>(3, 0));
         int k = 0;

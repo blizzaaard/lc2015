@@ -40,6 +40,23 @@ class Solution {
     }
 };
 
+using namespace std;
+
+class Solution {
+
+  public:
+    bool canJump(vector<int>& nums)
+    {
+        if (nums.size() < 1) return true;
+        int maxIndex = 0;
+        for (int i = 0; i < nums.size() - 1; ++i) {
+            maxIndex = max(maxIndex - 1, nums[i]);
+            if (0 == maxIndex) return false;
+        }
+        return true;
+    }
+};
+
 int main()
 {
     Solution s;

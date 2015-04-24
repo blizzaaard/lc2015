@@ -69,15 +69,51 @@ class Solution {
     }
 };
 
+using namespace std;
+
+class Solution1 {
+
+    void helper(vector< vector<int> > *result,
+                const vector<int>& candidates,
+                vector<int>& path,
+                int index, int target)
+    {
+        if (target < 0) return;
+        if (0 == target) {
+            result->push_back(path);
+            return;
+        }
+        for (int i = index; i < candidates.size(); ++i) {
+            path.push_back(candidates[i]);
+            helper(result, candidates, path, i, target - candidates[i]);
+            path.pop_back();
+        }
+    }
+
+  public:
+    vector< vector<int> > combinationSum(vector<int> &candidates, int target)
+    {
+        vector< vector<int> > result;
+        vector<int>           path;
+        sort(candidates.begin(), candidates.end());
+        helper(&result, candidates, path, 0, target);
+        return result;
+    }
+};
+
+
 int main()
 {
-    std::vector<int> candidates;
-    candidates.push_back(2);
-    candidates.push_back(3);
-    candidates.push_back(6);
-    candidates.push_back(7);
+    Solution1 s;
 
-    Solution s;
-    print(s.combinationSum(candidates, 7));
+    {
+        std::vector<int> candidates;
+        candidates.push_back(2);
+        candidates.push_back(3);
+        candidates.push_back(6);
+        candidates.push_back(7);
+
+        print(s.combinationSum(candidates, 7));
+    }
     return 0;
 }

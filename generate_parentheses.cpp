@@ -12,51 +12,44 @@
 #include <string>
 #include <vector>
 
-void print(const std::vector<std::string>& result)
+using namespace std;
+
+void print(const vector<string>& result)
 {
     for (int i = 0; i < result.size(); ++i) {
-        std::cout << result[i] << std::endl;
+        cout << result[i] << endl;
     }
-    std::cout << std::endl;
+    cout << endl;
 }
 
 class Solution {
 
-    void helper(std::vector<std::string> *results,
-                const std::string&        result,
-                int                       left,
-                int                       right,
-                int                       n)
+    void helper(vector<string> *result, const string& path,
+                int l, int r, int n)
     {
-        if (left < right) {
-            // Not possible to match since we have more ')' than '(' so far.
+        if (l == n && r == n) {
+            result->push_back(path);
             return;
         }
-        if (left == n && right == n) {
-            results->push_back(result);
-            return;
-        }
-        if (left < n) {
-            helper(results, result + '(', left + 1, right, n);
-        }
-        if (right < n) {
-            helper(results, result + ')', left, right + 1, n);
-        }
+        // Not possible to match since we have more ')' than '(' so far.
+        if (l < r) return;
+        if (l < n) helper(result, path + '(', l + 1, r, n);
+        if (r < n) helper(result, path + ')', l, r + 1, n);
     }
 
   public:
-    std::vector<std::string> generateParentheses(int n)
+    vector<string> generateParenthesis(int n)
     {
-        std::vector<std::string> results;
-        helper(&results, "", 0, 0, n);
-        return results;
+        vector<string> result;
+        helper(&result, "", 0, 0, n);
+        return result;
     }
 };
 
 int main()
 {
     Solution s;
-    print(s.generateParentheses(0));
-    print(s.generateParentheses(5));
+    print(s.generateParenthesis(0));
+    print(s.generateParenthesis(5));
     return 0;
 }

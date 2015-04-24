@@ -49,6 +49,8 @@ class Solution {
         int maxProfit = 0;
         for (int i = 1; i < prices.size(); ++i) {
             maxProfit = std::max(maxProfit, left[i] + right[i + 1]);
+            std::cout << maxProfit << " " << i << std::endl;
+            std::cout << left[i] << " " << right[i] << std::endl;
         }
         return maxProfit;
     }
@@ -56,11 +58,23 @@ class Solution {
 
 int main()
 {
-    std::vector<int> prices;
-    prices.push_back(1);
-    prices.push_back(2);
-    prices.push_back(3);
     Solution s;
-    std::cout << s.maxProfit(prices) << std::endl;
+//    {
+//        std::vector<int> prices;
+//        prices.push_back(1);
+//        prices.push_back(2);
+//        prices.push_back(3);
+//        std::cout << s.maxProfit(prices) << std::endl;
+//    }
+    {
+        std::vector<int> prices;
+        prices.push_back(3);
+        prices.push_back(2);
+        prices.push_back(6);
+        prices.push_back(5);
+        prices.push_back(0);
+        prices.push_back(3);
+        std::cout << s.maxProfit(prices) << std::endl;
+    }
     return 0;
 }

@@ -96,18 +96,49 @@ class Solution {
     }
 };
 
+using namespace std;
+
+class Solution1 {
+
+  public:
+    vector<vector<int> > generateMatrix(int n)
+    {
+        vector<vector<int> > result(n, vector<int>(n, 0));
+        if (0 == n) return result;
+        int count = 0;
+        int i = 0, j = 0, state = 0;
+        int top = 0, bottom = n - 1, left = 0, right = n - 1;
+        while (top <= bottom && left <= right) {
+            if (j > right) {
+                --j; ++i; state = 1; ++top;
+            } else if (i > bottom) {
+                --i; --j; state = 2; --right;
+            } else if (j < left) {
+                ++j; --i; state = 3; --bottom;
+            } else if (i < top) {
+                ++i; ++j; state = 0; ++left;
+            } else {
+                result[i][j] = ++count;
+                if (0 == state) ++j;
+                else if (1 == state) ++i;
+                else if (2 == state) --j;
+                else if (3 == state) --i;
+            }
+        }
+        return result;
+    }
+};
+
 int main()
 {
+    Solution1 s;
     {
-        Solution s;
         print(s.generateMatrix(1));
     }
     {
-        Solution s;
         print(s.generateMatrix(2));
     }
     {
-        Solution s;
         print(s.generateMatrix(3));
     }
     return 0;

@@ -31,6 +31,26 @@ class Solution {
     }
 };
 
+using namespace std;
+
+class Solution {
+
+  public:
+    int climbStairs(int n)
+    {
+        vector<int> opt(2, 0);
+        opt[0] = 1;
+        opt[1] = 2;
+        if (n < 2) return opt[n - 1];
+        for (int i = 2; i < n; ++i) {
+            int newStep = opt[0] + opt[1];
+            opt[0] = opt[1];
+            opt[1] = newStep;
+        }
+        return opt[1];
+    }
+};
+
 int main()
 {
     Solution s;

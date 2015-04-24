@@ -52,9 +52,47 @@ class Solution {
     }
 };
 
+using namespace std;
+
+class Solution1 {
+
+    bool isValid(const vector<int>& solution, int row)
+    {
+        for (int i = 0; i < row; ++i) {
+            if (solution[i] == solution[row]) return false;
+            if (row - i == abs(solution[row] - solution[i])) return false;
+        }
+        return true;
+    }
+
+    void helper(int& count, vector<int>& solution, int row, int n)
+    {
+        if (row >= n) {
+            ++count;
+            return;
+        }
+        for (int col = 0; col < n; ++col) {
+            solution[row] = col;
+            if (isValid(solution, row)) {
+                helper(count, solution, row + 1, n);
+            }
+            solution[row] = -1;
+        }
+    }
+
+  public:
+    int totalNQueens(int n)
+    {
+        int count = 0;
+        vector<int> solution(n, -1);
+        helper(count, solution, 0, n);
+        return count;
+    }
+};
+
 int main()
 {
-    Solution s;
+    Solution1 s;
     std::cout << s.totalNQueens(8) << std::endl;
     return 0;
 }

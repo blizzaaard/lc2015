@@ -101,9 +101,58 @@ class Solution {
     }
 };
 
+using namespace std;
+
+class Solution1 {
+
+    vector<string> toString(const vector<int>& solution)
+    {
+        int n = solution.size();
+        vector<string> result(n, string(n, '.'));
+        for (int i = 0; i < n; ++i) {
+            result[i][solution[i]] = 'Q';
+        }
+        return result;
+    }
+
+    bool isValid(const vector<int>& solution, int row)
+    {
+        for (int i = 0; i < row; ++i) {
+            if (solution[i] == solution[row]) return false;
+            if (row - i == abs(solution[row] - solution[i])) return false;
+        }
+        return true;
+    }
+
+    void helper(vector<vector<string> > &result, vector<int>& solution, int row, int n)
+    {
+        if (row >= n) {
+            result.push_back(toString(solution));
+            return;
+        }
+        for (int col = 0; col < n; ++col) {
+            solution[row] = col;
+            if (isValid(solution, row)) {
+                helper(result, solution, row + 1, n);
+            }
+            solution[row] = -1;
+        }
+    }
+
+  public:
+    vector<vector<string> > solveNQueens(int n)
+    {
+        vector<vector<string> > result;
+        vector<int>             solution(n, -1);
+        helper(result, solution, 0, n);
+        return result;
+    }
+};
+
 int main()
 {
-    Solution s;
-    print(s.solveNQueens(8));
+    Solution1 s;
+    print(s.solveNQueens(1));
+//    print(s.solveNQueens(8));
     return 0;
 }

@@ -53,9 +53,11 @@ class Solution {
             return;
         }
         for (int i = index; i < num.size(); ++i) {
+            // This is the only code that's not in Combination Sum
             if (i != index && num[i - 1] == num[i]) {
                 continue;
             }
+
             result->push_back(num[i]);
             helper(results, result, num, i + 1, target - num[i]);
             result->pop_back();

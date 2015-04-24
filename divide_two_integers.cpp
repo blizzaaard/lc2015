@@ -39,9 +39,37 @@ class Solution {
     }
 };
 
+class Solution1 {
+
+  public:
+    int divide(int dividend, int divisor)
+    {
+        unsigned int udividend = dividend > 0 ? dividend : -dividend;
+        unsigned int udivisor  = divisor  > 0 ? divisor  : -divisor;
+        unsigned int result = 0;
+        while (udividend >= udivisor) {
+            unsigned int tempDiv = udivisor;
+            unsigned int tempRes = 1;
+            while (udividend - tempDiv >= tempDiv) {
+                tempDiv <<= 1;
+                tempRes <<= 1;
+            }
+            udividend -= tempDiv;
+            result    += tempRes;
+        }
+        if ((dividend < 0 && divisor < 0) || (dividend > 0 && divisor > 0)) {
+            if (result > INT_MAX) return INT_MAX;
+            else return result;
+        } else {
+            if (result - 1 > INT_MAX) return INT_MAX;
+            else return -result;
+        }
+    }
+};
+
 int main()
 {
-    Solution s;
+    Solution1 s;
 
     std::cout << s.divide(10, 3) << std::endl;
     std::cout << s.divide(5, 2) << std::endl;

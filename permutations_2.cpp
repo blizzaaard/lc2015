@@ -79,6 +79,44 @@ class Solution {
     }
 };
 
+using namespace std;
+
+class Solution1 {
+
+    void helper(vector<vector<int> > *result, vector<int>& num, int index)
+    {
+        if (index >= num.size()) {
+            result->push_back(num);
+            return;
+        }
+        for (int i = index; i < num.size(); ++i) {
+            bool skip = false;
+            if (i != index) {
+                for (int j = index; j < i; ++j) {
+                    if (num[j] == num[i]) {
+                        skip = true;
+                        break;
+                    }
+                }
+            }
+            if (!skip) {
+                swap(num[index], num[i]);
+                helper(result, num, index + 1);
+                swap(num[i], num[index]);
+            }
+        }
+    }
+
+  public:
+    vector<vector<int> > permuteUnique(vector<int> &num)
+    {
+        vector<vector<int> > result;
+        sort(num.begin(), num.end());
+        helper(&result, num, 0);
+        return result;
+    }
+};
+
 int main()
 {
     Solution s;
