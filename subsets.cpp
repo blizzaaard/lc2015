@@ -54,9 +54,6 @@ class Solution_Recursion {
                 const std::vector<int>&         S,
                 int                             index)
     {
-        if (index == S.size()) {
-            return;
-        }
         for (int i = index; i < S.size(); ++i) {
             subset->push_back(S[i]);
             subsets->push_back(*subset);
@@ -108,6 +105,31 @@ class Solution {
             }
         }
         return subsets;
+    }
+};
+
+using namespace std;
+
+class Solution1 {
+
+    void helper(vector<vector<int> >& result, vector<int>& path, const vector<int>& set, int index)
+    {
+        for (int i = index; i < set.size(); ++i) {
+            path.push_back(set[i]);
+            result.push_back(path);
+            helper(result, path, set, i + 1);
+            path.pop_back();
+        }
+    }
+
+  public:
+    vector<vector<int> > subsets(vector<int> &set)
+    {
+        vector<vector<int> > result(1);
+        vector<int>          path;
+        sort(set.begin(), set.end());
+        helper(result, path, set, 0);
+        return result;
     }
 };
 

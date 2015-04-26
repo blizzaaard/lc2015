@@ -120,24 +120,58 @@ class Solution {
     }
 };
 
+using namespace std;
+
+class Solution3 {
+
+  public:
+    bool searchMatrix(vector<vector<int> > &matrix, int target)
+    {
+        int m = matrix.size();
+        if (0 == m) return false;
+        int n = matrix[0].size();
+        if (0 == n) return false;
+
+        int i = 0;
+        while (i <= m - 1 && matrix[i][n - 1] < target) {
+            ++i;
+        }
+        if (i > m - 1) return false;
+
+        int j = n - 1;
+        while (j >= 0 && matrix[i][j] > target) {
+            --j;
+        }
+        if (j < 0) return false;
+        else if (matrix[i][j] == target) return true;
+        return false;
+    }
+};
+
 int main()
 {
-    Solution s;
-
-    int A[3][4] = {
-        { 1,   3,  5,  7 },
-        { 10, 11, 16, 20 },
-        { 23, 30, 34, 50 },
-    };
-
-    std::vector<std::vector<int> > matrix(3, std::vector<int>(4, 0));
-    for (int i = 0; i < 3; ++i) {
-        for (int j = 0; j < 4; ++j) {
-            matrix[i][j] = A[i][j];
-        }
+    Solution3 s3;
+    {
+        std::vector<std::vector<int> > matrix(1, std::vector<int>(1, 1));
+        std::cout << s3.searchMatrix(matrix, 2) << std::endl;
     }
+    Solution s;
+    {
+        int A[3][4] = {
+            { 1,   3,  5,  7 },
+            { 10, 11, 16, 20 },
+            { 23, 30, 34, 50 },
+        };
 
-    std::cout << s.searchMatrix(matrix, 3) << std::endl;
+        std::vector<std::vector<int> > matrix(3, std::vector<int>(4, 0));
+        for (int i = 0; i < 3; ++i) {
+            for (int j = 0; j < 4; ++j) {
+                matrix[i][j] = A[i][j];
+            }
+        }
+
+        std::cout << s.searchMatrix(matrix, 3) << std::endl;
+    }
 
     return 0;
 }

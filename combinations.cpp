@@ -60,10 +60,39 @@ class Solution {
     }
 };
 
+using namespace std;
+
+class Solution1 {
+
+    void helper(vector<vector<int> >& result, vector<int>& path, int index, int n, int left)
+    {
+        if (0 == left) {
+            result.push_back(path);
+            return;
+        }
+        for (int i = index; i <= n - left + 1; ++i) {
+            path.push_back(i);
+            helper(result, path, i + 1, n, left - 1);
+            path.pop_back();
+        }
+    }
+
+  public:
+    vector<vector<int> > combine(int n, int k)
+    {
+        vector<vector<int> > result;
+        vector<int>          path;
+        helper(result, path, 1, n, k);
+        return result;
+    }
+};
+
 int main()
 {
-    Solution s;
-    print(s.combine(2, 1));
-    print(s.combine(4, 2));
+    Solution1 s;
+    {
+        print(s.combine(2, 1));
+        print(s.combine(4, 2));
+    }
     return 0;
 }

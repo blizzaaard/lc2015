@@ -72,6 +72,41 @@ class Solution {
     }
 };
 
+using namespace std;
+
+class Solution1 {
+
+    bool helper(vector<vector<char> >& board, int i, int j, const string& word, int index)
+    {
+        if (index >= word.size()) return true;
+        if (i < 0 || i >= board.size() || j < 0 || j >= board[0].size()) return false;
+        char c = board[i][j];
+        if (c != word[index]) return false;
+        board[i][j] = 0;
+        bool b = helper(board, i - 1, j, word, index + 1)
+              || helper(board, i + 1, j, word, index + 1)
+              || helper(board, i, j - 1, word, index + 1)
+              || helper(board, i, j + 1, word, index + 1);
+        board[i][j] = c;
+        return b;
+    }
+
+  public:
+    bool exist(vector<vector<char> > &board, string word)
+    {
+        int m = board.size();
+        if (0 == m) return false;
+        int n = board[0].size();
+        if (0 == n) return false;
+        for (int i = 0; i < m; ++i) {
+            for (int j = 0; j < n; ++j) {
+                if (helper(board, i, j, word, 0)) return true;
+            }
+        }
+        return false;
+    }
+};
+
 int main()
 {
     Solution s;

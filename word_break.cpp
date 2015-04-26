@@ -44,6 +44,26 @@ class Solution {
     }
 };
 
+using namespace std;
+
+class Solution {
+
+  public:
+    bool wordBreak(string s, unordered_set<string>& wordDict)
+    {
+        int m = s.size();
+        if (0 == m) return true;
+        vector<bool> opt(m + 1, true);
+        for (int i = 1; i <= m; ++i) {
+            for (int k = 1; k <= i; ++k) {
+                opt[i] = opt[k - 1] && wordDict.count(s.substr(k - 1, i - k + 1));
+                if (opt[i]) break;
+            }
+        }
+        return opt[m];
+    }
+};
+
 int main()
 {
     Solution s;

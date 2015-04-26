@@ -145,6 +145,42 @@ class Solution {
     }
 };
 
+using namespace std;
+
+class Solution1 {
+
+    void helper(vector<vector<int> >& result, vector<int>& path, const vector<int>& set, int index)
+    {
+        for (int i = index; i < set.size(); ++i) {
+            bool skip = false;
+            if (i != index) {
+                for (int j = index; j < i; ++j) {
+                    if (set[j] == set[i]) {
+                        skip = true;
+                        break;
+                    }
+                }
+            }
+            if (!skip) {
+                path.push_back(set[i]);
+                result.push_back(path);
+                helper(result, path, set, i + 1);
+                path.pop_back();
+            }
+        }
+    }
+
+  public:
+    vector<vector<int> > subsetsWithDup(vector<int> &set)
+    {
+        vector<vector<int> > result(1);
+        vector<int>          path;
+        sort(set.begin(), set.end());
+        helper(result, path, set, 0);
+        return result;
+    }
+};
+
 int main()
 {
     {

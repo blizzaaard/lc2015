@@ -87,6 +87,49 @@ class Solution {
     }
 };
 
+using namespace std;
+
+class Solution1 {
+
+    bool helper(vector<string>& result, vector<string>& path,
+                const string& s, int index, const unordered_set<string>& wordDict,
+                unordered_set<int>& cache)
+    {
+        if (index == s.size()) {
+            result.resize(result.size() + 1);
+            for (int i = 0; i < path.size(); ++i) {
+                if (!result.back().empty()) result.back() += ' ';
+                result.back() += path[i];
+            }
+            return true;
+        }
+        if (cache.count(index)) return false;
+        bool succeed = false;
+        for (int i = index; i < s.size(); ++i) {
+            string word = s.substr(index, i - index + 1);
+            if (wordDict.count(word)) {
+                path.push_back(word);
+                if (helper(result, path, s, i + 1, wordDict, cache)) succeed = true;
+                path.pop_back();
+            }
+        }
+        if (!succeed) cache.insert(index);
+        return succeed;
+    }
+
+  public:
+    vector<string> wordBreak(string s, unordered_set<string>& wordDict)
+    {
+        unordered_set<int> cache;
+            // The cache contains the 'index' of which s[index, end) can't be
+            // segmented.
+        vector<string> result;
+        vector<string> path;
+        helper(result, path, s, 0, wordDict, cache);
+        return result;
+    }
+};
+
 int main()
 {
     Solution s;
