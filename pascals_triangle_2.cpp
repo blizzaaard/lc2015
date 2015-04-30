@@ -14,6 +14,8 @@
 #include <iostream>
 #include <vector>
 
+using namespace std;
+
 void print(const std::vector<int>& result)
 {
     for (int i = 0; i < result.size(); ++i) {
@@ -25,23 +27,18 @@ void print(const std::vector<int>& result)
 class Solution {
 
   public:
-      std::vector<int> getRow(int rowIndex)
-      {
-        std::vector<int> result;
-        if (0 > rowIndex) {
-            return result;
-        }
+    vector<int> getRow(int rowIndex)
+    {
+        vector<int> result;
         result.resize(rowIndex + 1, 0);
         for (int i = 0; i <= rowIndex; ++i) {
-            int prev = 0;
+            int prev = result[0];
             for (int j = 0; j <= i; ++j) {
-                if (j == 0 || j == i) {
-                    result[j] = 1;
-                    prev      = 1;
-                } else {
-                    int newPrev = result[j];
-                    result[j] = prev + result[j];
-                    prev      = newPrev;
+                if (0 == j || j == i) result[j] = 1;
+                else {
+                    int tmp = result[j] + prev;
+                    prev = result[j];
+                    result[j] = tmp;
                 }
             }
         }
@@ -56,5 +53,6 @@ int main()
     print(s.getRow(1));
     print(s.getRow(3));
     print(s.getRow(4));
+    print(s.getRow(10));
     return 0;
 }

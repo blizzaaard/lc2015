@@ -28,18 +28,11 @@ class Solution {
         int indexA = m - 1;
         int indexB = n - 1;
         while (indexA >= 0 && indexB >= 0) {
-            if (A[indexA] > B[indexB]) {
-                A[index--] = A[indexA--];
-            } else {
-                A[index--] = B[indexB--];
-            }
+            if (A[indexA] > B[indexB]) A[index--] = A[indexA--];
+            else                       A[index--] = B[indexB--];
         }
-        while (indexA >= 0) {
-            A[index--] = A[indexA--];
-        }
-        while (indexB >= 0) {
-            A[index--] = B[indexB--];
-        }
+        while (indexA >= 0) A[index--] = A[indexA--];
+        while (indexB >= 0) A[index--] = B[indexB--];
     }
 };
 
