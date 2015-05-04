@@ -6,6 +6,7 @@
 #include <iostream>
 
 class Solution {
+    // Exponentiation by squaring
 
     double helper(double x, int n)
     {
