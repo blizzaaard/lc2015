@@ -49,6 +49,7 @@ int main()
     std::cout << s.longestValidParentheses("(") << std::endl;
     std::cout << s.longestValidParentheses("(()") << std::endl;
     std::cout << s.longestValidParentheses(")()())") << std::endl;
+    std::cout << s.longestValidParentheses("(()()))()") << std::endl;
 
     return 0;
 }
