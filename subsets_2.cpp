@@ -152,16 +152,7 @@ class Solution1 {
     void helper(vector<vector<int> >& result, vector<int>& path, const vector<int>& set, int index)
     {
         for (int i = index; i < set.size(); ++i) {
-            bool skip = false;
-            if (i != index) {
-                for (int j = index; j < i; ++j) {
-                    if (set[j] == set[i]) {
-                        skip = true;
-                        break;
-                    }
-                }
-            }
-            if (!skip) {
+            if (i == index || set[i] != set[i - 1]) {
                 path.push_back(set[i]);
                 result.push_back(path);
                 helper(result, path, set, i + 1);
@@ -204,6 +195,16 @@ int main()
 
         Solution_Recursion sr;
         print(sr.subsetsWithDup(S));
+    }
+
+    {
+        std::vector<int> S;
+        S.push_back(1);
+        S.push_back(1);
+        S.push_back(1);
+
+        Solution1 s;
+        print(s.subsetsWithDup(S));
     }
     return 0;
 }
